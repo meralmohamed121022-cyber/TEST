@@ -4791,6 +4791,63 @@ body > div:has(> label[for="codesFileInput"]),
     .floating-pdf-btn:hover .btn-text {
         opacity: 1;
     }
+    /* ========================================================
+   📱 السلايدر الأفقي الشامل (للموبايل والتابلت) - تم التحديث
+   ======================================================== */
+
+@media (max-width: 992px) {
+    /* 1. تطبيق نظام السلايدر على كل أنواع الحاويات العادية وأشكال المجلة */
+    .products-grid,
+    .magazine-products-grid,
+    .magazine-catd-inline-grid,
+    .magazine-blob-grid,
+    .magazine-page-row {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important; /* إجبار جميع الكروت في صف أفقي واحد */
+        overflow-x: auto !important; /* تفعيل السكرول الأفقي (السحب) */
+        overflow-y: hidden !important; 
+        scroll-snap-type: x mandatory !important;
+        gap: 15px !important;
+        padding: 10px 10px 25px 10px !important;
+        -webkit-overflow-scrolling: touch !important; /* سحب ناعم للآيفون */
+        width: 100% !important;
+        justify-content: flex-start !important; /* يبدأ الرص من البداية */
+        align-items: stretch !important; /* توحيد الطول للكروت في نفس السلايدر */
+    }
+
+    /* 2. إخفاء شريط السكرول أسفل الكروت لشكل أنظف */
+    .products-grid::-webkit-scrollbar,
+    .magazine-products-grid::-webkit-scrollbar,
+    .magazine-catd-inline-grid::-webkit-scrollbar,
+    .magazine-blob-grid::-webkit-scrollbar,
+    .magazine-page-row::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    /* 3. منع ضغط الكارت تماماً: وتثبيت حجمه عشان يعرض كل الداتا براحتها */
+    .product-card,
+    .magazine-product-card {
+        flex: 0 0 auto !important; /* تعطيل الضغط (يمنع تقلص الكارت) */
+        width: 175px !important;   /* عرض الكارت.. يمكنك تكبيره لـ 180 لو حابب */
+        min-width: 175px !important;
+        max-width: 175px !important;
+        scroll-snap-align: start !important; /* وقوف الكارت عند السحب */
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        height: auto !important; /* يطول حسب الداتا اللي جواه */
+    }
+
+    /* 4. لو كان سلايدر العرض فيه كارت واحد بس، بيتم توسيطه بشياكة بدل الفراغ */
+    .products-grid:has(> :last-child:nth-child(1)),
+    .magazine-products-grid:has(> :last-child:nth-child(1)),
+    .magazine-catd-inline-grid:has(> :last-child:nth-child(1)),
+    .magazine-blob-grid:has(> :last-child:nth-child(1)),
+    .magazine-page-row:has(> :last-child:nth-child(1)) {
+        justify-content: center !important;
+    }
+}
+
 </style>
 
 <button id="exportPDFBtn" class="floating-pdf-btn" onclick="exportFullMagazinePDF()">
